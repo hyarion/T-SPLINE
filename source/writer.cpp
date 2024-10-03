@@ -381,7 +381,7 @@ static void getUniqueST(const TVtxVIterator& vbegin, const TVtxVIterator& vend, 
 };
 
 template <class T>
-struct cmp_find : std::binary_function<T, T, bool>
+struct cmp_find
 {
 	bool operator()(T index1, T index2) const
 	{
