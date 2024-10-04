@@ -152,7 +152,7 @@ void StlWriter::writeStlBinary()
 		wfile << c;
 	}
 	TriMeshPtr mesh = triMesh();
-	long trisize = mesh->sizeTriangles();
+	uint32_t trisize = mesh->sizeTriangles();
 	wfile.write((char *)(&trisize), sizeof(trisize));
 
 	TriVIterator iter;
