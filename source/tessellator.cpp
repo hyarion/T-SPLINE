@@ -181,6 +181,7 @@ namespace TSPLINE {
 
 	void TFaceTessellator::process(const TriMeshPtr &tri_mesh, DsctEdgVector &discreted_edges)
 	{
+		int offset = tri_mesh->sizePoints();
 		TriVector triangles;
 		triangles = processBoundary(discreted_edges);
 		_parameters.erase(_parameters.end() - 3, _parameters.end());	//delete the super triangle vertices
@@ -196,6 +197,9 @@ namespace TSPLINE {
 		//triangles added to trimesh
 		for (TriVIterator iter = triangles.begin(); iter != triangles.end(); iter++)
 		{
+			(*iter)->point_indices[0] += offset;
+			(*iter)->point_indices[1] += offset;
+			(*iter)->point_indices[2] += offset;
 			(*iter)->normal_indices[0] = (*iter)->point_indices[0];
 			(*iter)->normal_indices[1] = (*iter)->point_indices[1];
 			(*iter)->normal_indices[2] = (*iter)->point_indices[2];
