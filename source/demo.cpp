@@ -93,18 +93,17 @@ int main(void)
 	stlwriter.writeStlAcii();
 	cout << "STL file: " << stlwriter.fileName() << " is written!" << endl;
 
-	ObjWriter objwriter(dirname + "/" + splinename, 0);
 	std::vector<std::string> faces;
 	demo->findTFaceNames(faces);
 	for (int i = 0; i<faces.size(); i++)
 	{
 		TriMeshPtr trimesh = tessellator.interpolateFace(faces[i]);
-		objwriter.addMesh(trimesh);
 		StlWriter stlwriter(dirname + "/" + splinename + "-" + faces[i], trimesh);
 		stlwriter.writeStlBinary();
 		cout << "STL file: " << stlwriter.fileName() << " is written!" << endl;
 	}
 
+	ObjWriter objwriter(dirname + "/" + splinename, trimesh);
 	objwriter.writeObj();
 	cout << "OBJ file: " << objwriter.fileName() << " is written!" << endl;
 
