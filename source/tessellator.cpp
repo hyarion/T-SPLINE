@@ -375,6 +375,17 @@ namespace TSPLINE {
 				triangle_t->point_indices[1] = triangle_edges[j]->end;
 				triangle_t->point_indices[2] = i;
 
+				if (bool ensure_ccw = true){
+					Parameter p0(_parameters[triangle_t->point_indices[0]]);
+					Parameter p1(_parameters[triangle_t->point_indices[1]]);
+					Parameter p2(_parameters[triangle_t->point_indices[2]]);
+					//calculate the signed area
+					Real area = (p1.s() - p0.s()) * (p2.t() - p0.t()) - (p2.s() - p0.s()) * (p1.t() - p0.t());
+					if (area < 0) {
+						std::swap(triangle_t->point_indices[0], triangle_t->point_indices[2]);
+					}
+				}
+
 				//check the legality of triangle
 				if (isTriangle(triangle_t))
 				{
